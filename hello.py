@@ -7,7 +7,13 @@ from datetime import datetime
 
 #create a flask instance
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+
+#Old sqlite DB
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+
+#New mysql DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:1234@localhost/our_users'
+
 
 #Secret key
 app.config['SECRET_KEY'] = 'secretkey'
@@ -27,7 +33,7 @@ class Users(db.Model):
         return '<Name> %r' %self.name
 
 with app.app_context():
-        db.create_all()
+    db.create_all()
 
 
 #Creating a form class
